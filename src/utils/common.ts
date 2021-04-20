@@ -24,14 +24,8 @@ export const canEditTeam = computed(() => {
   if (store.state.user.userDetail.type === 0) {
     return true
   }
-  const canEditTeamRoleList = [
-    RoleType['超级管理员'],
-    RoleType['团队超级管理员'],
-    RoleType['团队管理员']
-  ]
-  if (
-    canEditTeamRoleList.includes(store.state.user.currentTeamRoleId as number)
-  ) {
+  const canEditTeamRoleList = [RoleType['超级管理员'], RoleType['团队超级管理员'], RoleType['团队管理员']]
+  if (canEditTeamRoleList.includes(store.state.user.currentTeamRoleId as number)) {
     return true
   }
   return false
@@ -73,18 +67,15 @@ export function loadScript(url: string) {
       script.type = 'text/javascript'
       if (script.readyState) {
         //IE
-        script.onreadystatechange = function () {
-          if (
-            script.readyState == 'loaded' ||
-            script.readyState == 'complete'
-          ) {
+        script.onreadystatechange = function() {
+          if (script.readyState == 'loaded' || script.readyState == 'complete') {
             script.onreadystatechange = null
             Promise.resolve(0)
           }
         }
       } else {
         //Others: Firefox, Safari, Chrome, and Opera
-        script.onload = function () {
+        script.onload = function() {
           Promise.resolve(0)
         }
       }
@@ -102,10 +93,7 @@ export function loadScript(url: string) {
  * @param {string} value - 要查找的值
  * @returns {string} key  返回的 key
  */
-export function findKeyByValue(
-  target: { [key: string]: string },
-  value: string
-): string {
+export function findKeyByValue(target: { [key: string]: string }, value: string): string {
   const keys = Reflect.ownKeys(target) as Array<string>
   for (let i = 0; i < keys.length; i++) {
     if (target[keys[i]] === value) {
@@ -195,8 +183,7 @@ export function HtmlEncode(text: string) {
 
 // base64 encode
 export function base64Decode(data: string) {
-  const b64 =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='
+  const b64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='
   let o1
   let o2
   let o3
@@ -263,9 +250,7 @@ export function checkKey(iKey: number) {
 
 // get cookie value
 export function getCookie(name: string) {
-  const arr = document.cookie.match(
-    new RegExp('(^| )' + name + '=([^;]*)(;|$)')
-  )
+  const arr = document.cookie.match(new RegExp('(^| )' + name + '=([^;]*)(;|$)'))
   if (arr != null) return unescape(arr[2])
   return null
 }
@@ -350,20 +335,13 @@ export const isIphonex = () => {
     if (!isIOS) return false
     const { devicePixelRatio, screen } = window
     const { width, height } = screen
-    return xSeriesConfig.some(
-      (item) =>
-        item.devicePixelRatio === devicePixelRatio &&
-        item.width === width &&
-        item.height === height
-    )
+    return xSeriesConfig.some(item => item.devicePixelRatio === devicePixelRatio && item.width === width && item.height === height)
   }
   return false
 }
 
 export function isMobileUserAgent() {
-  return /iphone|ipod|android.*mobile|windows.*phone|blackberry.*mobile/i.test(
-    window.navigator.userAgent.toLowerCase()
-  )
+  return /iphone|ipod|android.*mobile|windows.*phone|blackberry.*mobile/i.test(window.navigator.userAgent.toLowerCase())
 }
 
 export function isViewportOpen() {
@@ -412,21 +390,13 @@ export function setCookie(name: string, value: any, Hours: number) {
   const nd = utc + 3600000 * offset
   const exp = new Date(nd)
   exp.setTime(exp.getTime() + Hours * 60 * 60 * 1000)
-  document.cookie =
-    name +
-    '=' +
-    escape(value) +
-    ';path=/;expires=' +
-    exp.toUTCString() +
-    ';domain=360doc.com;'
+  document.cookie = name + '=' + escape(value) + ';path=/;expires=' + exp.toUTCString() + ';domain=360doc.com;'
 }
 
 export function uniqueId(): number {
   const a: any = Math.random
   const b: any = parseInt
-  return Number(
-    Number(new Date()).toString() + b(10 * a()) + b(10 * a()) + b(10 * a())
-  )
+  return Number(Number(new Date()).toString() + b(10 * a()) + b(10 * a()) + b(10 * a()))
 }
 
 export function utf8Decode(strData: string) {
@@ -449,9 +419,7 @@ export function utf8Decode(strData: string) {
     } else {
       c2 = strData.charCodeAt(i + 1)
       c3 = strData.charCodeAt(i + 2)
-      tmpArr[ac++] = String.fromCharCode(
-        ((c1 & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63)
-      )
+      tmpArr[ac++] = String.fromCharCode(((c1 & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63))
       i += 3
     }
   }
@@ -465,64 +433,13 @@ export function utf8Decode(strData: string) {
 export function createPassword(len: number) {
   //可以生成随机密码的相关数组
   var num = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-  var english = [
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-    'g',
-    'h',
-    'i',
-    'j',
-    'k',
-    'l',
-    'm',
-    'n',
-    'o',
-    'p',
-    'q',
-    'r',
-    's',
-    't',
-    'u',
-    'v',
-    'w',
-    'x',
-    'y',
-    'z'
-  ]
-  var ENGLISH = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'I',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'O',
-    'P',
-    'Q',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z'
-  ]
+  var english = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+  var ENGLISH = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
   var special = ['-', '_', '#']
-  var config = num.concat(english).concat(ENGLISH).concat(special)
+  var config = num
+    .concat(english)
+    .concat(ENGLISH)
+    .concat(special)
 
   //先放入一个必须存在的
   var arr = []
